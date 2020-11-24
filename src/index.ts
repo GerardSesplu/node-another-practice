@@ -1,4 +1,6 @@
 import express from 'express';
+import authorsRoutes from './routes/authors.routes';
+import booksRoutes from './routes/books.routes';
 import userRoutes from './routes/user.routes';
 
 
@@ -12,4 +14,10 @@ app.listen(app.get('port'), () => {
 
 app.use(express.json());
 
+app.use('/authors', authorsRoutes.router);
 app.use('/users', userRoutes.router);
+
+app.use('/books', booksRoutes.router);
+
+
+

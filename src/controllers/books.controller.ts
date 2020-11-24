@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { Users } from './../models/users';
+import { Books } from './../models/books';
 
-class UsersControllers {
+class BooksControllers {
 
     public async index (req: Request, res: Response) {
 
         try{
-            const users = await Users.findAll({ raw: true })
-            res.send(users)
+            const books = await Books.findAll({ raw: true })
+            res.send(books)
         } catch (error) {
             console.log(error);
             res.sendStatus(500);
@@ -15,28 +15,12 @@ class UsersControllers {
 
     }
 
-    public async individual (req: Request, res: Response) {
-
-        try{
-
-            const user = await Users.findByPk(req.params.id, { raw: true });
-            res.send(user)
-
-        }
-        catch (error) {
-
-            res.send(error)
-            
-        }
-
-    }
- 
     public async create (req: Request, res: Response) {
 
         try{
 
         const params = req.body;
-        const result = await Users.create(params);
+        const result = await Books.create(params);
         res.json(result);
 
         }
@@ -47,21 +31,37 @@ class UsersControllers {
         }
     }
 
+    public async individual (req: Request, res: Response) {
+
+        try{
+
+            const book = await Books.findByPk(req.params.id, { raw: true });
+            res.send(book)
+
+        }
+        catch (error) {
+
+            res.send(error)
+            
+        }
+
+    }
+
     public async update (req: Request, res: Response) {
 
         try{
 
-            const user = await Users.update(
+            const book = await Books.update(
                 {
 
-                    name: req.body.firstname,
-                    lastname: req.body.lastname,
-                    email: req.body.email
+                    titulo: req.body.titulo,
+                    autor: req.body.autor,
+                    genero: req.body.genero
 
                 },
                 { where: { id: req.params.id }
             });
-            res.json(user)
+            res.json(book)
         }
         catch (error){
 
@@ -74,7 +74,7 @@ class UsersControllers {
 
         try{
 
-            const result = await Users.destroy({
+            const result = await Books.destroy({
                 where: {
                     id: req.params.id
                 }
@@ -92,9 +92,8 @@ class UsersControllers {
         
 
     }
-
    
 
 }
 
-export let usersController = new UsersControllers();
+export let booksController = new BooksControllers();

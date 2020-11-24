@@ -11,7 +11,7 @@ class UsersRoutes {
 
         this.router.get('/:id', usersController.individual)
 
-        this.router.post('/:id', usersController.create);
+        this.router.post('/', usersController.create);
 
         this.router.put('/:id', usersController.update);
 
