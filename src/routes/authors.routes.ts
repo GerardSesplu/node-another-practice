@@ -19,6 +19,8 @@ class AuthorsRoutes {
         this.router.delete('/:id', authorsController.destroy)
 
         this.router.get('/books', authorBooksController.index);
+
+        this.router.post('/books', authorBooksController.create);
     }
 }
 
